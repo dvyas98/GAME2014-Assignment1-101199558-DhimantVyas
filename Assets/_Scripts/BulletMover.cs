@@ -6,32 +6,25 @@ Dhimant Vyas
 Game Programming (T163)
 DVSquareProductions.
 
-Button Behavoiour
+Bullet Mover Behavoiour
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ScoreBehaviour : MonoBehaviour
+public class BulletMover : MonoBehaviour
 {
-    public Text Score;
-    public float ScoreAmount;
-    public float Increase;
-
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
-        ScoreAmount = 0.0f;
-        Increase = 1.0f;
-
+        GetComponent<Rigidbody>().velocity = transform.forward*speed; //Get the RigidBody Component of the bullet and move it forward with the speed assigned in the Inspector.
     }
 
     // Update is called once per frame
     void Update()
     {
-        Score.text = (int) ScoreAmount + ".";
-        ScoreAmount += Increase * Time.deltaTime;   // At evry Second add one number to the Counter.
+        
     }
 }
