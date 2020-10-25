@@ -16,6 +16,8 @@ using System.Xml;
 using UnityEngine;
 using UnityEngine.Experimental.XR;
 using UnityEngine.Events;
+using UnityEngine.UI;
+
 
 
 [System.Serializable]
@@ -30,15 +32,19 @@ public class PlayerMove : MonoBehaviour
     private Transform _transform;
     public GameController gameController;
     public CharacterController controller;
-
-    // Update is called once per frame
+    public EnemyManager enemyManager;
+    public BulletManager bulletManager;
     public float _runSpeed = 10.0f;
     public float tilt = 3.0f;
     public Joystick joystick;
     public Boundary boundary;
-    public 
+    public Fire firebutton;
+    public Vector3 positionBullet;
+    public Vector3 positionEnemy;
 
-    void Start()
+   
+
+     void Start()
     {
     }
 
@@ -55,9 +61,33 @@ public class PlayerMove : MonoBehaviour
             0.0f                                                                              //                                                                                        Z Component
         );
         GetComponent<Rigidbody>().rotation = Quaternion.Euler(-180,GetComponent<Rigidbody>().velocity.x*-tilt,0.0f);  // For the Tilting effect of the Player.
-
-
+       
+       
+            _FireBullet();
+   
+        
+       
+    }
+    public void _FireBullet()
+    {
+        positionBullet.x = transform.position.x-0.2f; 
+        positionBullet.y = transform.position.y + 0.9f;
+        positionBullet.z = transform.position.z;
+        // delay bullet firing 
+        if (Time.frameCount % 30 == 0 && bulletManager.HasBullets())
+        {
+            bulletManager.GetBullet(positionBullet);
+        }
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Ship_1"|| other.gameObject.name == "Ship_2"|| other.gameObject.name == "Ship_1(Clone)"|| other.gameObject.name == "Ship_2(Clone)")
+        {
+            GetComponent<AudioSource>().Play();
+            Destroy(gameObject);
+            Application.LoadLevel("Lose");
+   
+        }
     }
 
-   
-}
+    }

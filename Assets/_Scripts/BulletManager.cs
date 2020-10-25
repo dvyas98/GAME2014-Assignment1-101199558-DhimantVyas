@@ -6,60 +6,56 @@ Dhimant Vyas
 Game Programming (T163)
 DVSquareProductions.
 
-Game Controller
+Bullet Manager
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [System.Serializable]
-public class GameController : MonoBehaviour
+public class BulletManager : MonoBehaviour
 {
-    public GameObject bullet;
-    public Queue<GameObject> bullets;  //Making Of Bullets.Object Pooling Style!!
+    public BulletFactory bulletFactory;  //Just Defining one Type for this Game
     public int MaxBullets;
-    public Queue<GameObject> enemies;
-    public int MaxEnemy;
+                                                        //Defining our Bullet Part of the Object Pooling for the Bullet.
+    private Queue<GameObject> m_bulletPool;
+
     // Start is called before the first frame update
     void Start()
     {
-       _BuildBulletPool();
+        _BuildBulletPool();
     }
 
-
     private void _BuildBulletPool()
-    { 
-        bullets = new Queue<GameObject>();  //Let's Make the queue for our Bullet.
+    {
+        // create empty Queue structure
+        m_bulletPool = new Queue<GameObject>();
 
         for (int count = 0; count < MaxBullets; count++)
         {
-            var tempBullet = Instantiate(bullet); //Displaying (Instantiating)
-            tempBullet.SetActive(false);
-            tempBullet.transform.parent = transform;
-            bullets.Enqueue(tempBullet);
+            var tempBullet = bulletFactory.createBullet();
+            m_bulletPool.Enqueue(tempBullet);
         }
     }
-   
 
     public GameObject GetBullet(Vector3 position)
     {
-        var newBullet = bullets.Dequeue();
+        var newBullet = m_bulletPool.Dequeue();
         newBullet.SetActive(true);
         newBullet.transform.position = position;
         return newBullet;
     }
 
-   
-    public void returnBullet(GameObject returnedBullet)
+    public bool HasBullets()
     {
-        returnedBullet.SetActive(false);
-        bullets.Enqueue(returnedBullet);
-        
+        return m_bulletPool.Count > 0;
     }
 
-   
+    public void ReturnBullet(GameObject returnedBullet)
+    {
+        returnedBullet.SetActive(false);
+        m_bulletPool.Enqueue(returnedBullet);
+    }
 }

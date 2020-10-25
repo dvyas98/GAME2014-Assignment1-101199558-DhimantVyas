@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3370578}
   - component: {fileID: 2319444}
   - component: {fileID: 1248091189}
+  - component: {fileID: 7924786958891940448}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123078}
   m_LocalRotation: {x: 0.7665686, y: -0.29176772, z: 0.18164812, w: -0.5424465}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.84, y: -0.47, z: 0.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 432640}
@@ -98,6 +99,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &7924786958891940448
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123078}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 4.111209
+  m_Height: 11.097598
+  m_Direction: 1
+  m_Center: {x: 0.22972274, y: 0.042316135, z: 1.3304408}
 --- !u!1 &178266
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +122,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 432640}
+  - component: {fileID: 72380180}
+  - component: {fileID: 3727088533243744030}
   m_Layer: 0
   m_Name: Ship_2
   m_TagString: Untagged
@@ -129,3 +146,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 89.98, y: 0, z: 40}
+--- !u!114 &72380180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ecf8c983b28a544bbf178700f1621c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalSpeed: 2
+  verticalSpeed: 0.5
+  horizontalBoundary: 2.1
+  direction: 1
+--- !u!136 &3727088533243744030
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178266}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 6.0169606
+  m_Height: 12.722364
+  m_Direction: 1
+  m_Center: {x: 1.2908231, y: -0.08839428, z: 0.9558607}
